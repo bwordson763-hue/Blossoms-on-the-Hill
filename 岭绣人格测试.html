@@ -1,0 +1,2106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>测测你是哪一种岭绣人格 | Blossoms on the Hill 岭绣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-indigo: #2C3E6B;
+  --brand-gold: #C8A96E;
+  --brand-cream: #F7F3ED;
+  --brand-dark: #2A2A2A;
+  --brand-light: #EDE8E1;
+  --pers- migrate: #5B8C5A;
+  --pers-social: #E07B8A;
+  --pers-nature: #8FAF6A;
+  --pers-urban: #3D5A80;
+  --pers-butterfly: #1B3A5C;
+  --pers-minimal: #8C7B6B;
+  --pers-totem: #7B3B3B;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--brand-cream);
+  color: var(--brand-dark);
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== 通用装饰元素 ===== */
+.page-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.page-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 40px;
+}
+
+/* ===== 封面页 ===== */
+.cover-bg {
+  background: linear-gradient(170deg, #1A2A4A 0%, #2C3E6B 30%, #3D5A7A 60%, #1A3040 100%);
+}
+
+.mountain-layer {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 60%;
+  opacity: 0.6;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  filter: blur(20px);
+  animation: cloudFloat 8s ease-in-out infinite;
+}
+
+.cloud:nth-child(1) { width: 200px; height: 60px; top: 15%; left: -30px; animation-delay: 0s; }
+.cloud:nth-child(2) { width: 150px; height: 50px; top: 25%; right: -20px; animation-delay: 2s; }
+.cloud:nth-child(3) { width: 180px; height: 45px; top: 35%; left: 10%; animation-delay: 4s; }
+
+@keyframes cloudFloat {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-8px) translateX(5px); }
+}
+
+.cover-title-wrap {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.cover-brand-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--brand-gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border: 1px solid rgba(200,169,110,0.5);
+  border-radius: 20px;
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+.cover-main-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+
+.cover-subtitle {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.8;
+  max-width: 280px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.characters-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 36px 0 30px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.char-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: avatarFloat 3s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.char-avatar:nth-child(1) { background: linear-gradient(135deg, #5B8C5A, #A8D5BA); animation-delay: 0s; }
+.char-avatar:nth-child(2) { background: linear-gradient(135deg, #E07B8A, #F5C6D0); animation-delay: 0.3s; }
+.char-avatar:nth-child(3) { background: linear-gradient(135deg, #8FAF6A, #D4E8A0); animation-delay: 0.6s; }
+.char-avatar:nth-child(4) { background: linear-gradient(135deg, #3D5A80, #98C1D9); animation-delay: 0.9s; }
+.char-avatar:nth-child(5) { background: linear-gradient(135deg, #1B3A5C, #C9A84C); animation-delay: 1.2s; }
+.char-avatar:nth-child(6) { background: linear-gradient(135deg, #8C7B6B, #C8B89A); animation-delay: 1.5s; }
+.char-avatar:nth-child(7) { background: linear-gradient(135deg, #7B3B3B, #C8A06B); animation-delay: 1.8s; }
+
+@keyframes avatarFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.cover-hint {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+/* ===== 按钮样式 ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 44px;
+  background: linear-gradient(135deg, var(--brand-indigo), #3D5A80);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(44,62,107,0.4);
+  transition: all 0.3s ease;
+  letter-spacing: 2px;
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+.btn-primary:hover::before, .btn-primary:active::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 16px rgba(44,62,107,0.3);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: rgba(255,255,255,0.1);
+  color: #FFFFFF;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  letter-spacing: 1px;
+}
+
+.btn-ghost:active { transform: scale(0.97); background: rgba(255,255,255,0.2); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: linear-gradient(135deg, var(--brand-indigo), #3D5A80);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(44,62,107,0.3);
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.btn-secondary:active { transform: scale(0.97); }
+
+/* ===== 导语页 ===== */
+.intro-bg {
+  background: linear-gradient(170deg, #1A2A4A 0%, #2C3E6B 40%, #3D5A7A 70%, #2C4A5A 100%);
+}
+
+.intro-poem {
+  text-align: center;
+  padding: 60px 30px 40px;
+  max-width: 320px;
+}
+
+.intro-line {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  color: rgba(255,255,255,0.85);
+  line-height: 2.2;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeLineUp 0.8s ease forwards;
+}
+
+.intro-line:nth-child(1) { animation-delay: 0.3s; }
+.intro-line:nth-child(2) { animation-delay: 0.6s; }
+.intro-line:nth-child(3) { animation-delay: 0.9s; }
+.intro-line:nth-child(4) { animation-delay: 1.2s; }
+
+.intro-divider {
+  width: 40px;
+  height: 2px;
+  background: var(--brand-gold);
+  margin: 20px auto;
+  opacity: 0;
+  animation: fadeLineUp 0.8s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.intro-statement {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 2;
+  margin-top: 16px;
+  opacity: 0;
+  animation: fadeLineUp 0.8s ease forwards;
+  animation-delay: 1.8s;
+}
+
+.intro-cta {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 12px;
+  opacity: 0;
+  animation: fadeLineUp 0.8s ease forwards;
+  animation-delay: 2.1s;
+}
+
+@keyframes fadeLineUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 测试题页 ===== */
+.quiz-bg {
+  background: linear-gradient(180deg, #1A2A4A 0%, #2C3E6B 50%, #3D5A7A 100%);
+}
+
+.quiz-header {
+  width: 100%;
+  padding: env(safe-area-inset-top, 20px) 24px 0;
+  padding-top: max(env(safe-area-inset-top), 20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quiz-brand-small {
+  font-size: 11px;
+  color: var(--brand-gold);
+  letter-spacing: 2px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.quiz-progress-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 1px;
+}
+
+.quiz-progress-bar-wrap {
+  width: 100%;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  margin-top: 8px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-gold), #E8C882);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.quiz-content {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 36px;
+}
+
+.quiz-question-num {
+  font-size: 12px;
+  color: var(--brand-gold);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.quiz-question {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  font-weight: 600;
+  width: 100%;
+  word-wrap: break-word;
+  min-height: 30px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.quiz-option {
+  width: 100%;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  color: rgba(255,255,255,0.85);
+  font-size: 15px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  font-family: 'Noto Sans SC', sans-serif;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-option::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.quiz-option.selected {
+  background: rgba(200,169,110,0.15);
+  border-color: var(--brand-gold);
+  color: #FFFFFF;
+  transform: scale(1.02);
+}
+
+.quiz-option.selected::after {
+  background: var(--brand-gold);
+  border-color: var(--brand-gold);
+  box-shadow: 0 0 8px rgba(200,169,110,0.5);
+}
+
+.quiz-option:hover:not(.selected) {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.quiz-option:active { transform: scale(0.99); }
+
+.quiz-footer {
+  width: 100%;
+  padding: 16px 36px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-back-btn {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s;
+}
+
+.quiz-back-btn:hover { color: rgba(255,255,255,0.8); }
+
+.quiz-next-btn {
+  padding: 10px 24px;
+  background: var(--brand-gold);
+  color: var(--brand-indigo);
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+
+.quiz-next-btn:hover { background: #D4B87A; }
+.quiz-next-btn.hidden { opacity: 0; pointer-events: none; }
+
+/* ===== 加载页 ===== */
+.loading-bg {
+  background: linear-gradient(170deg, #1A2A4A 0%, #2C3E6B 50%, #1A3040 100%);
+}
+
+.loading-content {
+  text-align: center;
+  padding: 0 40px;
+}
+
+.loading-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 8px;
+}
+
+.loading-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 40px;
+}
+
+.loading-animation {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+.loading-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  animation: loadingSpin 2s linear infinite;
+}
+
+.loading-ring:nth-child(1) {
+  width: 120px; height: 120px;
+  border-top-color: var(--brand-gold);
+  border-right-color: rgba(200,169,110,0.3);
+  animation-delay: 0s;
+}
+
+.loading-ring:nth-child(2) {
+  width: 90px; height: 90px;
+  top: 15px; left: 15px;
+  border-bottom-color: rgba(255,255,255,0.3);
+  border-left-color: rgba(255,255,255,0.1);
+  animation-duration: 1.5s;
+  animation-direction: reverse;
+}
+
+.loading-ring:nth-child(3) {
+  width: 60px; height: 60px;
+  top: 30px; left: 30px;
+  border-top-color: rgba(255,255,255,0.15);
+  animation-duration: 1s;
+}
+
+@keyframes loadingSpin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-emblem {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  animation: emblemPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes emblemPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.loading-words {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.loading-word {
+  font-size: 13px;
+  color: var(--brand-gold);
+  letter-spacing: 2px;
+  animation: wordFade 2s ease-in-out infinite;
+}
+
+.loading-word:nth-child(1) { animation-delay: 0s; }
+.loading-word:nth-child(2) { animation-delay: 0.3s; }
+.loading-word:nth-child(3) { animation-delay: 0.6s; }
+.loading-word:nth-child(4) { animation-delay: 0.9s; }
+.loading-word:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes wordFade {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ===== 结果页 ===== */
+.result-bg {
+  background: var(--brand-cream);
+  justify-content: flex-start;
+}
+
+.result-header {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 40px;
+}
+
+.result-hero {
+  width: 100%;
+  padding: max(env(safe-area-inset-top), 30px) 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.result-hero-bg {
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-character {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  border: 4px solid rgba(255,255,255,0.6);
+  position: relative;
+  z-index: 2;
+  animation: characterReveal 1s ease-out;
+}
+
+@keyframes characterReveal {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.result-type-badge {
+  margin-top: 20px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+}
+
+.result-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 28px;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 8px 0 20px;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+
+.result-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.result-tag {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.result-body {
+  width: 100%;
+  padding: 24px 30px;
+  text-align: center;
+}
+
+.result-desc {
+  font-size: 15px;
+  line-height: 2;
+  color: var(--brand-dark);
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.result-style {
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.result-style-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.result-style-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 1.6;
+}
+
+.result-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 18px;
+  color: var(--brand-gold);
+  padding: 20px 0;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  margin: 16px 0 24px;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.result-action-btn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 14px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+
+.result-action-btn:active { transform: scale(0.98); }
+
+/* ===== 穿搭推荐页 ===== */
+.style-bg {
+  background: var(--brand-cream);
+}
+
+.style-header {
+  width: 100%;
+  padding: max(env(safe-area-inset-top), 30px) 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.style-top-badge {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--brand-gold);
+  margin-bottom: 8px;
+}
+
+.style-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--brand-indigo);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.style-subtitle {
+  font-size: 13px;
+  color: rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+.style-content {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  padding: 16px 30px 24px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.style-section {
+  margin-bottom: 24px;
+}
+
+.style-section-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--brand-gold);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.style-item-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.style-item {
+  padding: 8px 16px;
+  background: rgba(44,62,107,0.06);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--brand-indigo);
+  border: 1px solid rgba(44,62,107,0.1);
+}
+
+.style-card {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.style-card-img {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.style-card-info {
+  padding: 12px 16px;
+  background: #FFFFFF;
+}
+
+.style-card-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14px;
+  color: var(--brand-indigo);
+  margin-bottom: 4px;
+}
+
+.style-card-desc {
+  font-size: 12px;
+  color: rgba(0,0,0,0.4);
+  line-height: 1.5;
+}
+
+.style-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.style-action-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+
+.style-action-btn:active { transform: scale(0.98); }
+
+.style-back-hint {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0,0,0,0.3);
+  margin-top: 12px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* ===== 分享海报页 ===== */
+.share-bg {
+  background: var(--brand-cream);
+}
+
+.share-card {
+  width: calc(100vw - 48px);
+  max-width: 380px;
+  aspect-ratio: 3/4;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  position: relative;
+  margin-top: max(env(safe-area-inset-top), 20px);
+}
+
+.share-card-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px 20px;
+  position: relative;
+}
+
+.share-border {
+  position: absolute;
+  top: 12px; left: 12px; right: 12px; bottom: 12px;
+  border: 1px solid rgba(200,169,110,0.4);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.share-corner {
+  position: absolute;
+  width: 24px; height: 24px;
+  border-color: var(--brand-gold);
+  border-style: solid;
+}
+
+.corner-tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; border-radius: 4px 0 0 0; }
+.corner-tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; border-radius: 0 4px 0 0; }
+.corner-bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; border-radius: 0 0 0 4px; }
+.corner-br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; border-radius: 0 0 4px 0; }
+
+.share-brand {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--brand-gold);
+  text-align: center;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.share-emoji-char {
+  font-size: 80px;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.share-type-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  color: var(--brand-indigo);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.share-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  text-align: center;
+  line-height: 1.8;
+  font-style: italic;
+  max-width: 200px;
+  margin-bottom: 16px;
+}
+
+.share-divider {
+  width: 50px;
+  height: 1px;
+  background: var(--brand-gold);
+  margin: 12px auto;
+  opacity: 0.6;
+}
+
+.share-tagline {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.4);
+  text-align: center;
+  line-height: 1.8;
+}
+
+.share-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-qr-placeholder {
+  width: 80px;
+  height: 80px;
+  border: 1px dashed rgba(200,169,110,0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: rgba(0,0,0,0.25);
+  text-align: center;
+  padding: 4px;
+}
+
+.share-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: calc(100vw - 48px);
+  max-width: 380px;
+  margin-top: 20px;
+  padding: 0 0 20px;
+}
+
+.share-hint {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0,0,0,0.3);
+  margin-top: 4px;
+}
+
+/* ===== 浮动装饰 ===== */
+.float-butterfly {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.3;
+  animation: butterflyFloat 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.butterfly-1 { top: 15%; right: 8%; animation-delay: 0s; }
+.butterfly-2 { top: 30%; left: 5%; animation-delay: 2s; font-size: 16px; }
+.butterfly-3 { top: 60%; right: 6%; animation-delay: 4s; }
+
+@keyframes butterflyFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(5deg); }
+  75% { transform: translateY(5px) rotate(-3deg); }
+}
+
+.float-leaf {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0.2;
+  animation: leafFloat 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.leaf-1 { top: 20%; right: 10%; animation-delay: 1s; }
+.leaf-2 { top: 45%; left: 6%; animation-delay: 3s; }
+.leaf-3 { top: 70%; right: 8%; animation-delay: 5s; }
+
+@keyframes leafFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(8deg); }
+}
+
+/* ===== 页面底部装饰 ===== */
+.bottom-deco {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+}
+
+.water-wave {
+  position: absolute;
+  bottom: 0; left: -10%;
+  width: 120%; height: 60px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 50% 50% 0 0;
+  animation: wave 4s ease-in-out infinite;
+}
+
+.water-wave:nth-child(2) {
+  animation-delay: 1s;
+  opacity: 0.5;
+  bottom: 5px;
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateX(0) scaleY(1); }
+  50% { transform: translateX(2%) scaleY(1.1); }
+}
+
+/* ===== 副人格提示 ===== */
+.dual-hint {
+  background: rgba(200,169,110,0.1);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.dual-hint-title {
+  font-size: 12px;
+  color: var(--brand-gold);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.dual-hint-text {
+  font-size: 13px;
+  color: rgba(0,0,0,0.55);
+  line-height: 1.6;
+}
+
+/* ===== 人格角色展示图 ===== */
+.result-image-showcase {
+  width: 100%;
+  padding: 0 30px 30px;
+  text-align: center;
+}
+
+.personality-image {
+  max-width: 100%;
+  max-height: 280px;
+  width: auto;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  object-fit: contain;
+}
+
+/* ===== 分享海报角色图 ===== */
+.share-character-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--brand-cream), var(--brand-light));
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.share-personality-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ===== 修复 iPhone 顶部刘海 ===== */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .quiz-header, .result-hero, .style-header {
+    padding-top: max(env(safe-area-inset-top), 20px);
+  }
+}
+
+/* ===== 选项动效 ===== */
+.quiz-option.selected {
+  animation: optionPop 0.3s ease;
+}
+
+@keyframes optionPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1.02); }
+}
+
+/* ===== 品牌标识（水印） ===== */
+.watermark {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.25);
+  white-space: nowrap;
+  font-family: 'Noto Serif SC', serif;
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ==================== 第1页：封面页 ==================== -->
+<div class="page active" id="page-cover">
+  <div class="page-bg cover-bg">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="float-butterfly butterfly-1">🦋</div>
+    <div class="float-butterfly butterfly-2">🦋</div>
+    <div class="float-leaf leaf-1">🍃</div>
+    <div class="float-leaf leaf-2">🍂</div>
+    <div class="float-leaf leaf-3">🌿</div>
+    <svg class="mountain-layer" viewBox="0 0 375 300" preserveAspectRatio="xMidYMax slice">
+      <path d="M0,300 L60,200 L120,240 L180,160 L240,220 L300,170 L375,210 L375,300 Z" fill="rgba(30,50,80,0.4)"/>
+      <path d="M0,300 L80,230 L140,260 L200,190 L270,250 L340,200 L375,230 L375,300 Z" fill="rgba(20,35,65,0.3)"/>
+    </svg>
+  </div>
+  <div class="page-content" style="justify-content:flex-start; padding-top:0;">
+    <div class="cover-title-wrap">
+      <div class="cover-brand-tag">Blossoms on the Hill</div>
+      <div class="cover-main-title">测测你是哪一种<br>岭绣人格</div>
+      <div class="cover-subtitle">从山野到城市，从信仰到日常<br>找到属于你的岭绣气质</div>
+    </div>
+    <div class="characters-row">
+      <div class="char-avatar" title="迁徙密码型">🌿</div>
+      <div class="char-avatar" title="社交策展型">✨</div>
+      <div class="char-avatar" title="自然崇拜型">🌸</div>
+      <div class="char-avatar" title="都市穿梭型">🏙️</div>
+      <div class="char-avatar" title="蝴蝶妈妈型">🦋</div>
+      <div class="char-avatar" title="简约潜行型">🪶</div>
+      <div class="char-avatar" title="盘瓠图腾型">🔥</div>
+    </div>
+    <div class="cover-hint">7种岭绣人格，等你发现</div>
+    <button class="btn-primary" onclick="goPage('intro')">
+      开始测试
+    </button>
+    <div class="watermark">岭绣 LINGXIU</div>
+  </div>
+</div>
+
+<!-- ==================== 第2页：品牌导语页 ==================== -->
+<div class="page" id="page-intro">
+  <div class="page-bg intro-bg">
+    <div class="float-butterfly butterfly-1">🦋</div>
+    <div class="float-butterfly butterfly-2">🦋</div>
+    <div class="float-leaf leaf-1">🍃</div>
+    <div class="float-leaf leaf-2">🍂</div>
+    <svg style="position:absolute;bottom:0;left:0;width:100%;height:120px;opacity:0.15" viewBox="0 0 375 120" preserveAspectRatio="xMidYMax slice">
+      <path d="M0,120 Q50,80 100,100 Q150,60 200,90 Q250,50 300,80 Q340,60 375,90 L375,120 Z" fill="rgba(200,169,110,0.5)"/>
+    </svg>
+  </div>
+  <div class="page-content" style="justify-content:center;">
+    <div class="intro-poem">
+      <div class="intro-line">有的人把远方穿在身上，</div>
+      <div class="intro-line">有的人把日常过成策展，</div>
+      <div class="intro-line">有的人偏爱自然生长，</div>
+      <div class="intro-line">有的人擅长在城市中自由切换。</div>
+      <div class="intro-divider"></div>
+      <div class="intro-statement">
+        岭绣相信，穿搭从来不只是外表，<br>
+        它也是情绪、身份、节奏与内心认同。
+      </div>
+      <div class="intro-cta">完成测试，找到属于你的岭绣人格。</div>
+    </div>
+    <button class="btn-primary" onclick="goPage('quiz', 0)" style="margin-top:32px;">
+      进入测试
+    </button>
+    <div class="watermark">岭绣 LINGXIU</div>
+  </div>
+</div>
+
+<!-- ==================== 第3-14页：测试题页面 ==================== -->
+<div class="page" id="page-quiz">
+  <div class="page-bg quiz-bg">
+    <div class="float-butterfly butterfly-1">🦋</div>
+    <div class="float-butterfly butterfly-2" style="font-size:14px;opacity:0.2;">🦋</div>
+    <div class="float-leaf leaf-2">🍃</div>
+  </div>
+  <div class="quiz-header">
+    <div class="quiz-brand-small">岭绣</div>
+    <div class="quiz-progress-text" id="quiz-progress-text">01/12</div>
+  </div>
+  <div class="quiz-progress-bar-wrap">
+    <div class="quiz-progress-bar" id="quiz-progress-bar" style="width:8.33%"></div>
+  </div>
+  <div class="quiz-content">
+    <div class="quiz-question-num" id="quiz-q-num">第 1 题</div>
+    <div class="quiz-question" id="quiz-question">正在加载题目...</div>
+    <div class="quiz-options" id="quiz-options"></div>
+  </div>
+  <div class="quiz-footer">
+    <button class="quiz-back-btn" id="quiz-back" onclick="quizPrev()">
+      ← 上一题
+    </button>
+    <button class="quiz-next-btn hidden" id="quiz-next" onclick="quizNext()">
+      下一题
+    </button>
+  </div>
+  <div class="watermark">岭绣 LINGXIU</div>
+</div>
+
+<!-- ==================== 第15页：结果加载页 ==================== -->
+<div class="page" id="page-loading">
+  <div class="page-bg loading-bg">
+    <div class="float-butterfly butterfly-1" style="opacity:0.4;">🦋</div>
+    <div class="float-butterfly butterfly-2">🦋</div>
+    <div class="float-leaf leaf-1">🍃</div>
+    <div class="float-leaf leaf-2">🍂</div>
+    <div class="float-leaf leaf-3">🌿</div>
+  </div>
+  <div class="loading-content">
+    <div class="loading-animation">
+      <div class="loading-ring"></div>
+      <div class="loading-ring"></div>
+      <div class="loading-ring"></div>
+      <div class="loading-emblem">✦</div>
+    </div>
+    <div class="loading-title">正在为你匹配专属岭绣人格……</div>
+    <div class="loading-sub">请稍候，你的气质纹样正在生成中。</div>
+    <div class="loading-words">
+      <span class="loading-word">自由</span>
+      <span class="loading-word">守护</span>
+      <span class="loading-word">松弛</span>
+      <span class="loading-word">仪式感</span>
+      <span class="loading-word">表达</span>
+    </div>
+  </div>
+  <div class="watermark">岭绣 LINGXIU</div>
+</div>
+
+<!-- ==================== 第16页：测试结果页 ==================== -->
+<div class="page" id="page-result">
+  <div class="result-bg">
+    <div class="result-header" id="result-header">
+      <!-- 动态内容由 JS 填充 -->
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 第17页：人格穿搭推荐页 ==================== -->
+<div class="page" id="page-style">
+  <div class="style-bg">
+    <div class="style-header" id="style-header">
+      <!-- 动态内容由 JS 填充 -->
+    </div>
+    <div class="style-content" id="style-content">
+      <!-- 动态内容由 JS 填充 -->
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 第18页：分享海报页 ==================== -->
+<div class="page" id="page-share">
+  <div class="share-bg">
+    <div class="page-content" style="justify-content:flex-start;padding-top:0;">
+      <div class="share-card" id="share-card">
+        <div class="share-card-inner" id="share-card-inner">
+          <!-- 动态内容由 JS 填充 -->
+        </div>
+      </div>
+      <div class="share-actions">
+        <button class="btn-primary" onclick="saveShareImage()">
+          保存图片
+        </button>
+        <button class="btn-ghost" onclick="goPage('result')">
+          返回结果
+        </button>
+        <div class="share-hint">长按图片可保存到相册，分享到朋友圈</div>
+      </div>
+    </div>
+    <div class="watermark">岭绣 LINGXIU</div>
+  </div>
+</div>
+
+</div><!-- end #app -->
+
+<script>
+// ==================== 数据定义 ====================
+
+const PERSONALITIES = {
+  A: {
+    id: 'A',
+    name: '迁徙密码型',
+    emoji: '🌿',
+    enName: 'Migration Code',
+    color: '#5B8C5A',
+    colorLight: '#E8F0E7',
+    colorDark: '#2D5A30',
+    image: '迁徙密码型.jpg',
+    desc: `你喜欢流动的风景、陌生的街道、轻便的行囊。你不是在逃避什么，你是在用脚步丈量世界，用穿搭讲述一个又一个未完待续的故事。岭绣的迁徙系列，是为你而生的——轻盈、有故事感，适合出发，也适合在路上的每一刻。`,
+    tags: ['自由', '远方', '轻盈', '故事感'],
+    style: '轻便灵动、可游走于山野与都市之间的穿搭语言',
+    quote: '「你走过的路，都穿在身上。」',
+    colorRGB: '91,140,90'
+  },
+  B: {
+    id: 'B',
+    name: '社交策展型',
+    emoji: '✨',
+    enName: 'Social Curator',
+    color: '#E07B8A',
+    colorLight: '#F5E6EA',
+    colorDark: '#A04050',
+    image: '社交策展型.jpg',
+    desc: `你是那个让朋友圈发光的人。你懂构图、懂光线、懂什么叫"今日穿搭"。你的穿搭不只是衣服，是你的内容策展，是你对世界的表达方式。岭绣的策展系列，让你在每一个镜头里，都是主角。`,
+    tags: ['魅力', '表达', '出片', '社交感'],
+    style: '精致、有层次、上镜感强，适合被看见的穿搭',
+    quote: '「你的每一天，都值得被认真记录。」',
+    colorRGB: '224,123,138'
+  },
+  C: {
+    id: 'C',
+    name: '自然崇拜型',
+    emoji: '🌸',
+    enName: 'Nature Worship',
+    color: '#8FAF6A',
+    colorLight: '#E8F0D4',
+    colorDark: '#5A7A35',
+    image: '自然崇拜型.jpg',
+    desc: `你相信衣服应该像从自然里长出来的，柔软、舒适、有呼吸感。你偏爱花草蝴蝶的纹样，喜欢被风拂过的裙摆，向往那种不费力气的美。岭绣的自然系列，让你的每一件衣服，都是一片小小的风景。`,
+    tags: ['生长', '松弛', '温柔', '自然感'],
+    style: '森系、花卉刺绣、自然色系，让人想靠近的穿搭',
+    quote: '「像植物一样，自然舒展地活。」',
+    colorRGB: '143,175,106'
+  },
+  D: {
+    id: 'D',
+    name: '都市穿梭型',
+    emoji: '🏙️',
+    enName: 'Urban Drifter',
+    color: '#3D5A80',
+    colorLight: '#E8EEF4',
+    colorDark: '#1A2A40',
+    image: '都市穿梭型.jpg',
+    desc: `你不需要标签来定义自己，因为你的穿搭本身就在说话。你在会议室里从容，在咖啡馆里松弛，在任何场合都能找到自己的节奏。岭绣的都市系列，是你在城市中自如切换的铠甲，干净利落，却不失文化底气。`,
+    tags: ['独立', '干练', '边界感', '多元'],
+    style: '利落通勤、有质感、文化感与都市感并存',
+    quote: '「不被定义，才能真正自由。」',
+    colorRGB: '61,90,128'
+  },
+  E: {
+    id: 'E',
+    name: '蝴蝶妈妈型',
+    emoji: '🦋',
+    enName: 'Mother Butterfly',
+    color: '#1B3A5C',
+    colorLight: '#E8D8A0',
+    colorDark: '#0A1A2C',
+    accent: '#C9A84C',
+    image: '蝴蝶妈妈型.jpg',
+    desc: `你是那个自带主场感的人。苗族神话里，蝴蝶妈妈是创世之母，你的身上也有这种力量——气场强大，在重要时刻自带光芒，你深知仪式感的意义，也懂得如何让文化穿上身。岭绣的高定系列，是你的高光时刻。`,
+    tags: ['气场', '仪式感', '主场感', '传承'],
+    style: '礼服线、高定感、重要场合穿搭，文化精神的现代表达',
+    quote: '「有些时刻，值得被庄重以待。」',
+    colorRGB: '27,58,92'
+  },
+  F: {
+    id: 'F',
+    name: '简约潜行型',
+    emoji: '🪶',
+    enName: 'Minimal Walker',
+    color: '#8C7B6B',
+    colorLight: '#F0EDE8',
+    colorDark: '#5A4A3A',
+    image: '简约潜行型.jpg',
+    desc: `你不追求爆款，不迷信潮流。你懂得什么真正重要，什么经得起时间。你相信好的东西，是低调的、不喧哗的，但每一处细节都在说话。岭绣的简约系列，是长期主义者的审美衣橱——少，但每一件都是对的。`,
+    tags: ['质感', '低调', '长期主义', '稳定'],
+    style: '基础款升级、高质感通勤、简约有品质的穿搭',
+    quote: '「真正的好，不需要解释。」',
+    colorRGB: '140,123,107'
+  },
+  G: {
+    id: 'G',
+    name: '盘瓠图腾型',
+    emoji: '🔥',
+    enName: 'Totem Guardian',
+    color: '#7B3B3B',
+    colorLight: '#F0E4D4',
+    colorDark: '#4A1A1A',
+    image: '盘瓠图腾型.jpg',
+    desc: `你心里有一根线，连着祖先、连着故乡、连着那些不该被遗忘的故事。你的穿搭里藏着守护和归属，你相信传统不是过去，而是被穿在身上的力量。岭绣的图腾系列，让每一针每一线，都成为连接过去与未来的仪式。`,
+    tags: ['守护', '传承', '归属感', '温暖'],
+    style: '图腾纹样、节庆归乡穿搭、温暖有力量的文化表达',
+    quote: '「根在哪里，力量就在哪里。」',
+    colorRGB: '123,59,59'
+  }
+};
+
+const QUESTIONS = [
+  {
+    num: 1,
+    q: '如果有一个完整的周末，你最想怎么度过？',
+    options: [
+      { text: '去陌生的地方走走，边逛边发现新鲜故事', main: 'A', sub: ['B','D'] },
+      { text: '约朋友出门拍照、探店、记录今日穿搭', main: 'B', sub: ['A','C'] },
+      { text: '去有树、有水、有花的地方慢慢待一天', main: 'C', sub: ['A','D'] },
+      { text: '把生活安排妥帖，喝杯咖啡，安静完成自己的节奏', main: 'D', sub: ['C','F'] }
+    ]
+  },
+  {
+    num: 2,
+    q: '你更喜欢别人如何形容你的穿搭？',
+    options: [
+      { text: '很有故事感，一看就很会旅行', main: 'A', sub: [] },
+      { text: '好会穿，照片里特别出片', main: 'B', sub: [] },
+      { text: '温柔舒服，像自然里长出来的气质', main: 'C', sub: [] },
+      { text: '干净高级，不用用力就很有质感', main: 'D', sub: [] }
+    ]
+  },
+  {
+    num: 3,
+    q: '面对重要场合时，你希望自己的状态是？',
+    options: [
+      { text: '成为全场焦点，自带仪式感和存在感', main: 'E', sub: [] },
+      { text: '有分寸、有气场，表达专业与自信', main: 'D', sub: [] },
+      { text: '温暖稳重，让人觉得安心可靠', main: 'G', sub: [] },
+      { text: '保持真实的自己，但又带一点特别的精神气质', main: 'F', sub: ['A'] }
+    ]
+  },
+  {
+    num: 4,
+    q: '以下哪一种元素最能吸引你？',
+    options: [
+      { text: '山路、地图、远方、民俗小物', main: 'A', sub: [] },
+      { text: '相机、镜子、灯光、精致配件', main: 'B', sub: [] },
+      { text: '花草、蝴蝶、溪水、森林', main: 'C', sub: [] },
+      { text: '图腾、神话、传统纹样、祖辈故事', main: 'G', sub: ['E'] }
+    ]
+  },
+  {
+    num: 5,
+    q: '如果买一件带苗绣元素的衣服，你最看重什么？',
+    options: [
+      { text: '好走动、好搭配，适合旅行和出行', main: 'A', sub: [] },
+      { text: '上镜、吸睛，拍照非常出彩', main: 'B', sub: [] },
+      { text: '柔和舒适，带自然感和治愈感', main: 'C', sub: [] },
+      { text: '版型利落，适合通勤或多个场合穿', main: 'D', sub: [] }
+    ]
+  },
+  {
+    num: 6,
+    q: '你更像下面哪一种人？',
+    options: [
+      { text: '总想出发，总在路上', main: 'A', sub: [] },
+      { text: '懂氛围，也懂表达自己', main: 'B', sub: [] },
+      { text: '喜欢松弛感，不喜欢太拥挤', main: 'C', sub: [] },
+      { text: '在不同身份之间切换自如', main: 'D', sub: ['G'] }
+    ]
+  },
+  {
+    num: 7,
+    q: '在朋友眼里，你更可能是？',
+    options: [
+      { text: '总能发现小众目的地的人', main: 'A', sub: [] },
+      { text: '很会组织聚会与内容的人', main: 'B', sub: [] },
+      { text: '温柔平和，很会照顾情绪的人', main: 'C', sub: [] },
+      { text: '低调靠谱，不轻易跟风的人', main: 'F', sub: ['G'] }
+    ]
+  },
+  {
+    num: 8,
+    q: '你最容易被哪句话打动？',
+    options: [
+      { text: '世界很大，边走边认识自己', main: 'A', sub: [] },
+      { text: '生活值得被认真构图与分享', main: 'B', sub: [] },
+      { text: '人要像植物一样，自然舒展地生长', main: 'C', sub: [] },
+      { text: '真正重要的东西，会在传承中留下来', main: 'G', sub: [] }
+    ]
+  },
+  {
+    num: 9,
+    q: '以下哪种穿搭最接近你的理想状态？',
+    options: [
+      { text: '轻便灵动，像随时可以出发', main: 'A', sub: [] },
+      { text: '有层次、有亮点，一眼就能记住', main: 'B', sub: [] },
+      { text: '柔软、自然、像风景的一部分', main: 'C', sub: [] },
+      { text: '利落、得体、耐看又实穿', main: 'D', sub: [] }
+    ]
+  },
+  {
+    num: 10,
+    q: '当你进入一个新环境时，你通常会？',
+    options: [
+      { text: '先观察路线和角落，想去探索', main: 'A', sub: [] },
+      { text: '找到最适合拍照和记录的位置', main: 'B', sub: [] },
+      { text: '感受气氛，看树影、风、水和光线', main: 'C', sub: [] },
+      { text: '快速适应规则，找到自己的节奏', main: 'F', sub: ['G'] }
+    ]
+  },
+  {
+    num: 11,
+    q: '你更认可哪种时尚观？',
+    options: [
+      { text: '穿得有故事，比穿得流行更重要', main: 'A', sub: [] },
+      { text: '穿搭本身就是一种个人表达', main: 'B', sub: [] },
+      { text: '最好的衣服，应该让人感到松弛与舒适', main: 'C', sub: [] },
+      { text: '真正高级的东西，往往低调而稳定', main: 'F', sub: [] }
+    ]
+  },
+  {
+    num: 12,
+    q: '如果让你用一个词形容自己的内在力量，你会选？',
+    options: [
+      { text: '自由', main: 'A', sub: [] },
+      { text: '魅力', main: 'B', sub: [] },
+      { text: '生长', main: 'C', sub: [] },
+      { text: '守护', main: 'G', sub: [] }
+    ]
+  }
+];
+
+const STYLE_RECOMMENDATIONS = {
+  A: {
+    items: ['旅行轻便系列', '故事感配饰', '轻量外搭', '可折叠刺绣单品'],
+    scenes: ['机场穿搭', '旅途街拍', '周末出走', '轻装出行'],
+    keywords: ['轻便', '故事感', '多搭配', '适合出行'],
+    cards: [
+      { name: '「岭上行者」旅行轻便系列', desc: '轻盈刺绣单品，适合出发与行走', emoji: '🌿', color: '#E8F0E7' },
+      { name: '故事感配饰系列', desc: '带地图元素与远方意象的民俗小件', emoji: '🗺️', color: '#F7F3ED' },
+      { name: '轻量外搭系列', desc: '易收纳、可叠穿，适合多场景切换', emoji: '🧥', color: '#E8EEE4' }
+    ]
+  },
+  B: {
+    items: ['出片感套装', '精致配件', '拍照友好型穿搭', '有层次的上下装组合'],
+    scenes: ['咖啡馆', '探店打卡', '城市街拍', '朋友聚会'],
+    keywords: ['出片', '精致', '有层次', '上镜感'],
+    cards: [
+      { name: '「岭上策展」精致出片系列', desc: '为镜头而生的穿搭组合，精致上镜', emoji: '✨', color: '#F5E6EA' },
+      { name: '精致配件系列', desc: '配饰点睛，让穿搭更完整更有记忆点', emoji: '💎', color: '#F0E6F0' },
+      { name: '层次感套装', desc: '上下装精心组合，适合多场景穿搭', emoji: '👗', color: '#F5E0E8' }
+    ]
+  },
+  C: {
+    items: ['花卉刺绣', '森系裙装', '自然色系单品', '柔软面料刺绣单品'],
+    scenes: ['公园漫步', '野外郊游', '自然景区', '日常松弛'],
+    keywords: ['柔软', '自然', '花草感', '治愈系'],
+    cards: [
+      { name: '「岭上花开」自然森系系列', desc: '花卉刺绣与自然色系，温柔治愈', emoji: '🌸', color: '#E8F0D4' },
+      { name: '森系裙装系列', desc: '柔软裙装，带自然呼吸感的穿搭', emoji: '🌿', color: '#F0E8D0' },
+      { name: '自然色系单品', desc: '大地色系，融入风景的穿搭语言', emoji: '🍃', color: '#E0ECD0' }
+    ]
+  },
+  D: {
+    items: ['通勤西装', '套装', '低调文化感外套', '利落裤装'],
+    scenes: ['职场通勤', '商务会议', '城市咖啡馆', '都市出行'],
+    keywords: ['利落', '实穿', '通勤感', '文化底气'],
+    cards: [
+      { name: '「岭上都市」通勤文化系列', desc: '文化感与都市感的平衡，利落通勤', emoji: '🏙️', color: '#E8EEF4' },
+      { name: '文化感外套系列', desc: '低调细节，低调中见品质', emoji: '🧥', color: '#E4ECF4' },
+      { name: '套装组合', desc: '多场合可穿的精致通勤套装', emoji: '👔', color: '#E0E8F0' }
+    ]
+  },
+  E: {
+    items: ['礼服线', '高定系列', '节庆穿搭', '仪式感刺绣套装'],
+    scenes: ['重要场合', '品牌活动', '文化展览', '节庆时刻'],
+    keywords: ['高定', '仪式感', '主场感', '文化表达'],
+    cards: [
+      { name: '「岭上盛典」高定礼服系列', desc: '高光时刻的礼服选择，文化与仪式感并存', emoji: '🦋', color: '#E8D8A0' },
+      { name: '仪式感套装', desc: '主场感的穿搭，重要场合的铠甲', emoji: '👗', color: '#E0D8C0' },
+      { name: '节庆刺绣系列', desc: '文化图腾与节庆氛围的完美融合', emoji: '✨', color: '#E8DCC0' }
+    ]
+  },
+  F: {
+    items: ['基础高质感系列', '长期主义通勤衣橱', '简约刺绣细节单品', '质感面料单品'],
+    scenes: ['日常通勤', '都市出行', '安静场合', '生活日常'],
+    keywords: ['质感', '简约', '长期主义', '低调高级'],
+    cards: [
+      { name: '「岭上日常」简约质感系列', desc: '少，但每一件都是对的', emoji: '🪶', color: '#F0EDE8' },
+      { name: '长期主义衣橱', desc: '经得起时间考验的基础款升级', emoji: '🧥', color: '#EDE8E0' },
+      { name: '质感面料单品', desc: '低调面料，高级质感', emoji: '✨', color: '#E8E4E0' }
+    ]
+  },
+  G: {
+    items: ['图腾守护系列', '节庆归乡穿搭', '温暖文化表达单品', '家族感刺绣单品'],
+    scenes: ['节庆归乡', '家族聚会', '文化活动', '温暖时刻'],
+    keywords: ['守护', '图腾', '传承感', '温暖力量'],
+    cards: [
+      { name: '「岭上传承」图腾守护系列', desc: '连接过去与未来的文化表达', emoji: '🔥', color: '#F0E4D4' },
+      { name: '节庆归乡系列', desc: '回家时的仪式感穿搭，温暖有归属', emoji: '🏠', color: '#ECD8C4' },
+      { name: '温暖文化表达', desc: '让文化穿上身，让归属成为力量', emoji: '💫', color: '#E8DCC8' }
+    ]
+  }
+};
+
+// ==================== 状态管理 ====================
+
+let currentPage = 'cover';
+let currentQuestion = 0;
+let answers = {};
+let result = null;
+
+// ==================== 页面导航 ====================
+
+function goPage(pageId, param) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) {
+    page.classList.add('active');
+    currentPage = pageId;
+    window.scrollTo(0, 0);
+  }
+
+  if (pageId === 'quiz') {
+    currentQuestion = param !== undefined ? param : 0;
+    renderQuestion();
+  } else if (pageId === 'loading') {
+    setTimeout(() => {
+      calculateResult();
+      renderResult();
+      goPage('result');
+    }, 2200);
+  }
+}
+
+// ==================== 测试题逻辑 ====================
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQuestion];
+  const total = QUESTIONS.length;
+  const progress = ((currentQuestion) / total) * 100;
+
+  document.getElementById('quiz-progress-text').textContent =
+    String(currentQuestion + 1).padStart(2, '0') + '/' + String(total).padStart(2, '0');
+  document.getElementById('quiz-progress-bar').style.width = Math.max(progress, 8.33) + '%';
+  document.getElementById('quiz-q-num').textContent = '第 ' + q.num + ' 题';
+  document.getElementById('quiz-question').textContent = q.q;
+
+  const optionsEl = document.getElementById('quiz-options');
+  optionsEl.innerHTML = '';
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt.text;
+    if (answers[currentQuestion] === idx) {
+      btn.classList.add('selected');
+    }
+    btn.onclick = () => selectOption(idx);
+    optionsEl.appendChild(btn);
+  });
+
+  const nextBtn = document.getElementById('quiz-next');
+  nextBtn.classList.toggle('hidden', answers[currentQuestion] === undefined);
+  nextBtn.textContent = currentQuestion === total - 1 ? '查看结果' : '下一题';
+
+  const backBtn = document.getElementById('quiz-back');
+  backBtn.style.visibility = currentQuestion > 0 ? 'visible' : 'hidden';
+}
+
+function selectOption(idx) {
+  answers[currentQuestion] = idx;
+  document.querySelectorAll('.quiz-option').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === idx);
+  });
+  document.getElementById('quiz-next').classList.remove('hidden');
+
+  // 自动下一题，300ms 延迟
+  setTimeout(() => {
+    if (currentQuestion < QUESTIONS.length - 1) {
+      quizNext();
+    }
+  }, 450);
+}
+
+function quizNext() {
+  if (answers[currentQuestion] === undefined) return;
+  if (currentQuestion < QUESTIONS.length - 1) {
+    currentQuestion++;
+    renderQuestion();
+  } else {
+    goPage('loading');
+  }
+}
+
+function quizPrev() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
+  }
+}
+
+// ==================== 计分逻辑 ====================
+
+function calculateResult() {
+  const scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
+
+  Object.entries(answers).forEach(([qIdx, optIdx]) => {
+    const q = QUESTIONS[parseInt(qIdx)];
+    const opt = q.options[optIdx];
+
+    // 主人格 +2
+    scores[opt.main] += 2;
+
+    // 副人格 +1
+    (opt.sub || []).forEach(sub => {
+      scores[sub] += 1;
+    });
+  });
+
+  // 排序找出前两名
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const mainId = sorted[0][0];
+  const secondId = sorted[1][0];
+  const diff = sorted[0][1] - sorted[1][1];
+
+  result = {
+    main: PERSONALITIES[mainId],
+    second: PERSONALITIES[secondId],
+    diff: diff,
+    isDual: diff <= 2
+  };
+}
+
+// ==================== 结果页渲染 ====================
+
+function renderResult() {
+  const r = result;
+  const pers = r.main;
+
+  const header = document.getElementById('result-header');
+
+  // 根据人格类型选择背景
+  const bgStyle = pers.colorDark
+    ? `background: linear-gradient(170deg, ${pers.colorDark} 0%, ${pers.color} 50%, ${pers.colorLight} 100%);`
+    : `background: linear-gradient(170deg, ${pers.color} 0%, ${pers.colorLight} 100%);`;
+
+  // 图片路径 - 需要上传到 GitHub 后修改
+  const imageUrl = `images/${pers.image}`;
+
+  header.innerHTML = `
+    <div class="result-hero" style="${bgStyle}">
+      <div class="result-type-badge">BLOSSOMS ON THE HILL · 岭绣</div>
+      <div class="result-character" style="background: linear-gradient(135deg, ${pers.color}, ${pers.colorLight});">
+        ${pers.emoji}
+      </div>
+      <div class="result-title">${pers.name}</div>
+      <div class="result-tags">
+        ${pers.tags.map(tag => `
+          <span class="result-tag" style="background:${pers.colorLight}; color:${pers.colorDark};">
+            ${tag}
+          </span>
+        `).join('')}
+      </div>
+      <svg style="position:absolute;bottom:0;left:0;width:100%;height:40px;" viewBox="0 0 400 40" preserveAspectRatio="none">
+        <path d="M0,40 Q100,10 200,25 Q300,40 400,20 L400,40 Z" fill="rgba(247,243,237,0.8)"/>
+      </svg>
+    </div>
+
+    <div class="result-body">
+      ${r.isDual ? `
+        <div class="dual-hint">
+          <div class="dual-hint-title">✦ 你也有 ${r.second.name} 的气质</div>
+          <div class="dual-hint-text">测试显示你在 ${pers.name} 和 ${r.second.name} 之间有较明显的双重倾向，
+          你的气质因此更加丰富和立体。</div>
+        </div>
+      ` : ''}
+
+      <div class="result-desc">${pers.desc}</div>
+
+      <div class="result-style" style="background: linear-gradient(135deg, ${pers.color}, ${pers.colorDark});">
+        <div class="result-style-label">适合你的岭绣风格</div>
+        <div class="result-style-text">${pers.style}</div>
+      </div>
+
+      <div class="result-quote">${pers.quote}</div>
+
+      <div class="result-actions">
+        <button class="result-action-btn" style="background:${pers.color};color:#fff;" onclick="renderStyle()">
+          查看穿搭推荐
+        </button>
+        <button class="result-action-btn" style="background:transparent;color:${pers.colorDark};border:1.5px solid ${pers.color};" onclick="renderShare()">
+          生成分享海报
+        </button>
+        <button class="result-action-btn" style="background:transparent;color:rgba(0,0,0,0.4);border:none;font-size:12px;" onclick="restartTest()">
+          再测一次
+        </button>
+      </div>
+    </div>
+
+    <!-- 人格角色展示图片 -->
+    <div class="result-image-showcase">
+      <img src="${imageUrl}" alt="${pers.name}" class="personality-image" onerror="this.style.display='none'">
+    </div>
+  `;
+}
+
+// ==================== 穿搭推荐页渲染 ====================
+
+function renderStyle() {
+  const pers = result.main;
+  const rec = STYLE_RECOMMENDATIONS[pers.id];
+
+  const header = document.getElementById('style-header');
+  header.innerHTML = `
+    <div class="style-top-badge">${pers.name}</div>
+    <div class="style-title">你的专属穿搭推荐</div>
+    <div class="style-subtitle">基于你的岭绣人格，量身推荐</div>
+  `;
+
+  const content = document.getElementById('style-content');
+  content.innerHTML = `
+    <div class="style-section">
+      <div class="style-section-title">单品方向</div>
+      <div class="style-item-list">
+        ${rec.items.map(item => `<span class="style-item">${item}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="style-section">
+      <div class="style-section-title">适合场景</div>
+      <div class="style-item-list">
+        ${rec.scenes.map(item => `<span class="style-item" style="background:rgba(200,169,110,0.1);border-color:rgba(200,169,110,0.2);color:#C8A96E;">${item}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="style-section">
+      <div class="style-section-title">衣橱关键词</div>
+      <div class="style-item-list">
+        ${rec.keywords.map(item => `<span class="style-item">${item}</span>`).join('')}
+      </div>
+    </div>
+
+    <div class="style-section">
+      <div class="style-section-title">品牌系列推荐</div>
+      ${rec.cards.map(card => `
+        <div class="style-card">
+          <div class="style-card-img" style="background:${card.color};">${card.emoji}</div>
+          <div class="style-card-info">
+            <div class="style-card-name">${card.name}</div>
+            <div class="style-card-desc">${card.desc}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="style-cta">
+      <button class="style-action-btn" style="background:${pers.color};color:#fff;" onclick="showToast('即将为您打开品牌官网')">
+        进入专属系列
+      </button>
+      <button class="style-action-btn" style="background:#fff;color:${pers.color};border:1.5px solid ${pers.color};" onclick="showToast('衣橱功能即将上线')">
+        解锁我的衣橱
+      </button>
+      <button class="style-action-btn" style="background:rgba(44,62,107,0.06);color:var(--brand-indigo);border:1px solid rgba(44,62,107,0.1);" onclick="showToast('单品推荐即将上线')">
+        查看适合我的单品
+      </button>
+    </div>
+
+    <div class="style-back-hint" onclick="goPage('result')">← 返回测试结果</div>
+  `;
+
+  goPage('style');
+}
+
+// ==================== 分享海报页渲染 ====================
+
+function renderShare() {
+  const pers = result.main;
+  const inner = document.getElementById('share-card-inner');
+
+  // 图片路径 - 需要上传到 GitHub 后修改
+  const imageUrl = `images/${pers.image}`;
+
+  inner.innerHTML = `
+    <div class="share-corner corner-tl"></div>
+    <div class="share-corner corner-tr"></div>
+    <div class="share-corner corner-bl"></div>
+    <div class="share-corner corner-br"></div>
+    <div class="share-border"></div>
+
+    <div class="share-brand">BLOSSOMS ON THE HILL · 岭绣</div>
+
+    <div style="font-family:'Noto Serif SC',serif;font-size:11px;color:rgba(0,0,0,0.4);margin-bottom:8px;letter-spacing:1px;">
+      测测你是哪一种岭绣人格
+    </div>
+
+    <div class="share-character-img">
+      <img src="${imageUrl}" alt="${pers.name}" class="share-personality-img" onerror="this.parentElement.innerHTML='<span style=font-size:60px>${pers.emoji}</span>'">
+    </div>
+
+    <div class="share-type-name">${pers.name}</div>
+
+    <div class="share-divider"></div>
+
+    <div class="share-quote">${pers.quote}</div>
+
+    <div class="share-tags" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;">
+      ${pers.tags.map(tag => `
+        <span style="padding:4px 10px;background:${pers.colorLight};color:${pers.colorDark};border-radius:12px;font-size:10px;">
+          ${tag}
+        </span>
+      `).join('')}
+    </div>
+
+    <div class="share-footer">
+      <div class="share-qr-placeholder">
+        <span>扫码<br>再次测试</span>
+      </div>
+      <div class="share-tagline">
+        Blossoms on the Hill 岭绣<br>
+        让穿搭，成为你的表达语言
+      </div>
+    </div>
+  `;
+
+  goPage('share');
+}
+
+// ==================== 辅助功能 ====================
+
+function restartTest() {
+  answers = {};
+  currentQuestion = 0;
+  result = null;
+  goPage('quiz', 0);
+}
+
+function saveShareImage() {
+  showToast('长按上方海报图片即可保存到相册');
+}
+
+function showToast(msg) {
+  if (document.getElementById('toast')) return;
+  const toast = document.createElement('div');
+  toast.id = 'toast';
+  toast.style.cssText = `
+    position:fixed;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(42,42,42,0.9);
+    color:#fff;
+    padding:14px 28px;
+    border-radius:12px;
+    font-size:14px;
+    z-index:9999;
+    text-align:center;
+    backdrop-filter:blur(10px);
+    font-family:'Noto Sans SC',sans-serif;
+    animation:fadeToast 0.3s ease;
+    max-width:80vw;
+  `;
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.3s';
+    setTimeout(() => toast.remove(), 300);
+  }, 2000);
+}
+
+// 添加 toast 动画
+const styleEl = document.createElement('style');
+styleEl.textContent = `
+  @keyframes fadeToast {
+    from { opacity:0; transform:translate(-50%,-50%) scale(0.9); }
+    to { opacity:1; transform:translate(-50%,-50%) scale(1); }
+  }
+`;
+document.head.appendChild(styleEl);
+
+// ==================== 初始化 ====================
+
+// 禁止双击缩放
+document.addEventListener('touchstart', e => {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', e => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) e.preventDefault();
+  lastTouchEnd = now;
+}, false);
+
+// 微信分享配置（预留）
+function setupWechatShare() {
+  if (typeof wx !== 'undefined') {
+    wx.ready(() => {
+      wx.updateAppMessageShareData({
+        title: '测测你是哪一种岭绣人格 | Blossoms on the Hill 岭绣',
+        desc: '从山野到城市，从信仰到日常，找到属于你的岭绣气质。',
+        link: window.location.href,
+        imgUrl: '',
+        success: () => {}
+      });
+      wx.updateTimelineShareData({
+        title: '我的岭绣人格是：' + (result ? result.main.name : '待测试'),
+        link: window.location.href,
+        imgUrl: '',
+        success: () => {}
+      });
+    });
+  }
+}
+
+// 初始化
+goPage('cover');
+</script>
+</body>
+</html>
